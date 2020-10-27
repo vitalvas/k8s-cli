@@ -12,10 +12,10 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ghcr.io/${{ github.repository_owner }}/kubectl:latest
+      run: docker build . --file Dockerfile --tag docker.pkg.github.com/${{ github.repository_owner }}/k8s-cli/kubectl:latest
     
     - name: Log into GitHub Container Registry
-      run: echo "${{ secrets.CR_PAT }}" | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
+      run: echo "${{ secrets.CR_PAT }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
 
     - name: Push image to GitHub Container Registry
-      run: docker push ghcr.io/${{ github.repository_owner }}/kubectl:latest
+      run: docker push docker.pkg.github.com/${{ github.repository_owner }}/k8s-cli/kubectl:latest
